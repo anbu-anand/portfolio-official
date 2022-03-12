@@ -1,12 +1,25 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./App";
+import App from './App';
 
-const rootElement = document.getElementById("root");
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+
+import userReducer from './states/reducers/usersReducer';
+
+const store = configureStore({
+    reducer: {
+        users: userReducer,
+    },
+});
+
+const rootElement = document.getElementById('root');
 ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  rootElement
+    <StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </StrictMode>,
+    rootElement
 );
